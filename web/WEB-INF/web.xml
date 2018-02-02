@@ -4,25 +4,35 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
     <servlet>
+        <servlet-name>indexServlet</servlet-name>
+        <servlet-class>com.servlet.IndexServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>indexServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>purchaseServlet</servlet-name>
         <servlet-class>com.servlet.PurchaseServlet</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>purchaseServlet</servlet-name>
         <url-pattern>/final_purchase</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>checkoutServlet</servlet-name>
         <servlet-class>com.servlet.CheckoutConfirmationServlet</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>checkoutServlet</servlet-name>
         <url-pattern>/checkout</url-pattern>
     </servlet-mapping>
-    
+
     <servlet>
         <servlet-name>loginServlet</servlet-name>
         <servlet-class>com.servlet.LoginServlet</servlet-class>
@@ -44,13 +54,13 @@
     </servlet-mapping>
 
     <!--<filter>-->
-        <!--<filter-name>sessionFilter</filter-name>-->
-        <!--<filter-class>com.filter.AutheticationFilter</filter-class>-->
+    <!--<filter-name>sessionFilter</filter-name>-->
+    <!--<filter-class>com.filter.AutheticationFilter</filter-class>-->
     <!--</filter>-->
 
     <!--<filter-mapping>-->
-        <!--<filter-name>sessionFilter</filter-name>-->
-        <!--<url-pattern>/pages/*</url-pattern>-->
+    <!--<filter-name>sessionFilter</filter-name>-->
+    <!--<url-pattern>/pages/*</url-pattern>-->
     <!--</filter-mapping>-->
 
     <session-config>

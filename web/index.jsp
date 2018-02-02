@@ -1,201 +1,159 @@
-<%--
-Created by IntelliJ IDEA.
-User: 986214
-Date: 1/30/2018
-Time: 1:49 PM
-To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
-  <script src="../resources/js/jquery.min.js"></script>
-  <script src="../resources/js/jquery.cookie.js" type="text/javascript"></script>
-  <title>Main page</title>
-  <style>
-      @font-face {
-          font-family: "titillium_web";
-          src: url("resources/fonts/TitilliumWeb-Light.ttf");
-      }
-    .product{
-        float: left;
-      text-align: center;
-        margin: 10px;
-      width: 400px;
-      height: 400px;
-      display: inline-block;
-      box-shadow: 0px 0px 2px 2px rgba(50, 50, 50, 0.5);
-    }
+    <title>Main page</title>
+    <style>
+        @font-face {
+            font-family: "cabin";
+            src: url('resources/fonts/Cabin-Regular.ttf') format('truetype');
+        }
 
-      #store_name {
-          color: white;
-          font-size: 50px;
-          margin: 5px;
-          font-family: titillium_web, serif;
-          float: left;
-      }
+        @font-face {
+            font-family: "quicksand";
+            src: url('resources/fonts/Quicksand-Regular.ttf') format('truetype');
+        }
 
-      #login_part{
-          float: right;
-          text-align: right;
-          margin: 5px;
-      }
+        @font-face {
+            font-family: "raleway";
+            src: url("<c:url value='resources/fonts/Raleway-Regular.ttf'/>");
+        }
 
-    .product:hover{
-        box-shadow: 2px 2px 4px 4px rgba(50, 50, 50, 0.5);
-    }
+        .product {
+            float: left;
+            text-align: center;
+            margin: 10px;
+            width: 400px;
+            height: 400px;
+            display: inline-block;
+            box-shadow: 0px 0px 2px 2px rgba(50, 50, 50, 0.5);
+        }
 
-    .prod_img{
-        height: 75%;
-    }
+        #store_name {
+            color: white;
+            font-size: 50px;
+            margin: 5px;
+            font-family: "quicksand", serif;
+            float: left;
+        }
 
-    .prod_add_cart{
-        height: 50px;
-        color: #000;
-        cursor: pointer;
-        background-color: #29434e;
-        text-align: center;
-    }
+        #login_part {
+            float: right;
+            text-align: right;
+            margin: 5px;
+            color: white;
+            height: 75px;
+        }
 
-    .prod_add_cart>img{
-        margin: 10px;
-    }
+        #login_part svg {
+            margin-top: 20px;
+            margin-right: 25px;
+        }
 
-    .prod_add_cart:hover{
-        background-color: #819ca9;
-    }
+        .product:hover {
+            box-shadow: 2px 2px 4px 4px rgba(50, 50, 50, 0.5);
+        }
 
-    #header{
-        left: 0;
-        margin: 0px;
-        padding: 0px;
-        box-shadow: 3px 0px 2px 4px rgba(50, 50, 50, 0.5);
-        background-color: #37474f;
-        position: fixed;
-        top: 0;
-        height: 100px;
-        width: 100%;
-    }
+        .prod_img {
+            height: 75%;
+        }
 
-    #header+*{
-      margin-top: 100px;
-    }
+        .prod_add_cart {
+            height: 50px;
+            color: #000;
+            cursor: pointer;
+            background-color: #29434e;
+            text-align: center;
+        }
 
-      #header a{
-          margin-right: 10px;
-      }
+        .prod_add_cart svg {
+            margin-top: 12px;
+        }
 
-      #products {
-          width: 95%;
-          margin: auto;
-          text-align: center;
-      }
+        .prod_add_cart:hover {
+            background-color: #819ca9;
+        }
 
-      #toast{
-        position:fixed;
-          right: 20px;
-          bottom: 20px;
-          text-align: center;
-          background-color: rgba(0,0,0,0.75);
-          color: azure;
-          width: 300px;
-          height: 50px;
-          padding: 5px;
-          font-weight: bold;
-      }
-  </style>
+        #header {
+            left: 0;
+            margin: 0px;
+            padding: 0px;
+            box-shadow: 3px 0px 2px 4px rgba(50, 50, 50, 0.5);
+            background-color: #37474f;
+            position: fixed;
+            top: 0;
+            height: 75px;
+            width: 100%;
+        }
+
+        #header a {
+            margin-right: 10px;
+        }
+
+        #products {
+            width: 95%;
+            margin: 100px auto;
+            text-align: center;
+        }
+
+        #toast {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.75);
+            color: azure;
+            width: 300px;
+            height: 50px;
+            padding: 5px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="header">
-  <p id="store_name">Sport clothes store</p>
-  <div id="login_part">
-      <a href="http://localhost:8080/checkout">
-          <img src="resources/images/cart.svg">
-      </a>
-      <a href="http://localhost:8080/login">
-          <img src="resources/images/login-variant.svg" alt="login image">
-      </a>
-  </div>
+    <p id="store_name">Sport clothes store</p>
+    <div id="login_part">
+        <a href="http://localhost:8080/checkout">
+            <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                <path fill="white"
+                      d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+        </a>
+    </div>
 </div>
-<h1>Welcome to main page</h1>
-<p><a href="contact.jsp">Contact page</a></p>
 <div id="products">
-    <div class="product">
-      <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14133A.jpg">
-      <p>YouTube Ultimate Hooded Sweatshirt $32.35</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
+    <c:forEach items="${allproducts}" var="item">
+        <div class="product">
+            <img class="prod_img" src="${item.value.image}">
+            <p>${item.value.name} $${item.value.price}</p>
+            <div class="prod_add_cart" prod_id="${item.value.productId}">
+                <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 0h24v24H0zm18.31 6l-2.76 5z" fill="none"/>
+                    <path fill="white"
+                          d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-4 9c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-9.83-3.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.86-7.01L19.42 4h-.01l-1.1 2-2.76 5H8.53l-.13-.27L6.16 6l-.95-2-.94-2H1v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.13 0-.25-.11-.25-.25z"/>
+                </svg>
+            </div>
         </div>
-    </div>
-    <div class="product">
-      <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14152A.jpg">
-      <p>Rowan Pullover Hood $60.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-      <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14160A.jpg">
-      <p>Grey Heather Fleece Zip Hoodie $38.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14133A.jpg">
-        <p>YouTube Ultimate Hooded Sweatshirt $32.35</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14152A.jpg">
-        <p>Rowan Pullover Hood $60.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14160A.jpg">
-        <p>Grey Heather Fleece Zip Hoodie $38.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14133A.jpg">
-        <p>YouTube Ultimate Hooded Sweatshirt $32.35</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14152A.jpg">
-        <p>Rowan Pullover Hood $60.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
-    <div class="product">
-        <img class="prod_img" src="https://shop.polymer-project.org/es6-unbundled/data/images/10-14160A.jpg">
-        <p>Grey Heather Fleece Zip Hoodie $38.85</p>
-        <div class="prod_add_cart">
-            <img  prod_id="shirt1" src="resources/images/cart-plus.svg" alt="Add to cart">
-        </div>
-    </div>
+    </c:forEach>
 </div>
 <div id="toast">
     <p id="toast_message">This is toast message. Please attention</p>
 </div>
 <script>
-    $(".product>img").click(function(){
+    $(".product>.prod_add_cart").click(function () {
         var product = new Array();
-        if($.cookie("product")){
+        if ($.cookie("product")) {
             product = JSON.parse($.cookie("product"));
         }
         product.push($(this).attr("prod_id"));
         // $.cookie("product", JSON.stringify(product));
 
-        $.cookie("product", JSON.stringify(product), { expires : 10 , path : '/'});
+        $.cookie("product", JSON.stringify(product), {expires: 10, path: '/'});
         // var date = new Date();
         // date.setTime(date.getTime() + (1*24*60*60*1000));
         // var expires = "; expires=" + date.toUTCString();
