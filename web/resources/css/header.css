@@ -1,0 +1,54 @@
+#store_name {
+    color: white;
+    font-size: 50px;
+    margin-top: 5px;
+    margin-left: 20px;
+    font-family: "quicksand", serif;
+    float: left;
+}
+
+#login_part {
+    float: right;
+    text-align: right;
+    margin: 5px;
+    color: white;
+    height: 75px;
+}
+
+#login_part svg {
+    margin-top: 20px;
+    margin-right: 25px;
+}
+
+#logout_part {
+    float: right;
+    text-align: right;
+    margin: 5px;
+    color: white;
+    height: 75px;
+}
+
+#logout_part svg {
+    margin-top: 20px;
+}
+
+#logout_part span {
+    vertical-align: super;
+    margin: 5px;
+}
+
+#header {
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    box-shadow: 3px 0px 2px 4px rgba(50, 50, 50, 0.5);
+    background-color: #37474f;
+    position: fixed;
+    top: 0;
+    height: 75px;
+    width: 100%;
+}
+
+#header a {
+    margin-right: 10px;
+}

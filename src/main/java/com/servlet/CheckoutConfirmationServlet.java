@@ -19,11 +19,13 @@ public class CheckoutConfirmationServlet extends HttpServlet{
             if(session != null) {
                 session.setAttribute("errormsg", "You need to sign up or log in before purchase.");
             }
-            req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("/loginOrSignup.jsp").forward(req, resp);
             return;
         }
 
         List<Product> purchaseItems = new ArrayList<>();
+        Boolean productFound = false;
+        float totalSum = 0;
         Cookie[] cookies1 = req.getCookies();
         for(Cookie cookie : cookies1){
             if(cookie.getName().equals("product")){
@@ -32,14 +34,24 @@ public class CheckoutConfirmationServlet extends HttpServlet{
                     JSONArray jsonArray = new JSONArray(productsString);
                     List<Object> productIds = jsonArray.toList();
                     for(Object Id : productIds){
-                        purchaseItems.add(Database.allproducts.get(Id.toString()));
+                        Product prod = Database.allproducts.get(Id.toString());
+                        purchaseItems.add(prod);
+                        totalSum += prod.getPrice();
                     }
+                    productFound = true;
 
                 } catch (Exception e){
                     e.printStackTrace();
                 }
             }
         }
+
+        if(!productFound){
+            session.setAttribute("errormsg", "Your cart is empty.");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+        }
+
+        session.setAttribute("totalSum", totalSum);
         session.setAttribute("purchaseItems", purchaseItems);
         req.getRequestDispatcher("/pages/checkout_confirmation.jsp").forward(req, resp);
     }

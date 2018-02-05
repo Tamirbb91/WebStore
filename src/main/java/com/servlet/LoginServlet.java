@@ -11,7 +11,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/loginOrSignup.jsp").forward(req, resp);
     }
 
     @Override
@@ -20,7 +20,6 @@ public class LoginServlet extends HttpServlet {
             String username = req.getParameter("username");
             String password = req.getParameter("password");
             String rememberMe = req.getParameter("remember_me");
-            Cookie[] cookies1 = req.getCookies();
             if(Database.login(username, password)){
                 if(rememberMe != null && rememberMe.equals("on")){
                     Cookie usernameCookie = new Cookie("username", username);
@@ -39,16 +38,17 @@ public class LoginServlet extends HttpServlet {
                 }
                 HttpSession session = req.getSession();
                 session.setAttribute("user", new User(username, password, new Cart()));
-                resp.sendRedirect("/");
+                req.setAttribute("errormsg", "");
+                resp.sendRedirect("/home");
                 return;
             } else {
                 req.setAttribute("errormsg", "Username or Password is invalid!");
-                req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
+                req.getRequestDispatcher("/loginOrSignup.jsp").forward(req, resp);
             }
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        req.getRequestDispatcher("/pages/login.jsp").forward(req, resp);
+        req.getRequestDispatcher("/loginOrSignup.jsp").forward(req, resp);
     }
 }

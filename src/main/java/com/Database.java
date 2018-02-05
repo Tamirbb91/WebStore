@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Database {
     public static HashMap<String, User> allusers = new HashMap<>();
     public static HashMap<String, Product> allproducts = new HashMap<>();
-    static{
+    public static void init(){
         User user1 = new User("Tamir", "Password", new Cart());
         User user2 = new User("Admin", "PassW0rd", new Cart());
         User user3 = new User("Test", "paaswoord", new Cart());
@@ -44,9 +44,5 @@ public class Database {
             e.printStackTrace();
         }
         return false;
-    }
-
-    public static User signup(String username, String password){
-        return null;
     }
 }
